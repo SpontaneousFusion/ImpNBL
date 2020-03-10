@@ -1,4 +1,4 @@
-# Hello, world!
+# This is the main R file for ImpNBL library
 #
 # This is an example function named 'hello'
 # which prints 'Hello, world!'.
