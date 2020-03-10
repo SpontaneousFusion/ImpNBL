@@ -114,7 +114,6 @@ main.nbl.data
 
 
 
-
   spectra.NaI = matrix( nrow = n, ncol = 256)
   livetime.NaI = matrix( nrow = n, ncol = 1)
   realtime.NaI = matrix( nrow = n, ncol = 1)
