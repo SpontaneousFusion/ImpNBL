@@ -18,7 +18,7 @@ file.path="~/Dropbox/Bayesiansk statistikprojekt/Data/AUTOMORC_setups/setup1"
 #
 # NBL.type=1
 
-fReadNBL_old=function(file.path,NBL.type=1)
+fReadNBL_full=function(file.path,NBL.type=1)
 {
 
   file.Main=paste0(file.path,".nbl")
@@ -81,57 +81,73 @@ fReadNBL_old=function(file.path,NBL.type=1)
     readBin(file.connection,what= integer(), endian="little",size=2,n=1) #Height above ground
 
     spectra.Main[i,]=readBin(file.connection,what= integer(), endian="little",size=2,n=256)
-  spectra.Main[i,]
-    }
-  close(file.connection)
-# fix.offset
-main.nbl.data
-
-  spectra.HPGe = matrix( nrow = n, ncol = 2048)
-  livetime.HPGe = matrix( nrow = n, ncol = 1)
-  realtime.HPGe = matrix( nrow = n, ncol = 1)
-  file.connection = file(file.HPGE, "rb")
-  for(i in 1:n)
-  {
-    realtime.HPGe[i]=readBin(file.connection,what= integer(), endian="little",size=4,n=1)
-    livetime.HPGe[i]=readBin(file.connection,what= integer(), endian="little",size=4,n=1)
-    spectra.HPGe[i,]=readBin(file.conncecortion,what= integer(), endian="little",size=2,n=2048)
+    spectra.Main[i,]
   }
   close(file.connection)
-
-
-
-  spectra.NaI = matrix( nrow = n, ncol = 256)
-  livetime.NaI = matrix( nrow = n, ncol = 1)
-  realtime.NaI = matrix( nrow = n, ncol = 1)
-  file.connection = file(file.NaI, "rb")
-  for(i in 1:n)
-  {
-    realtime.NaI[i]=readBin(file.connection,what= integer(), endian="little",size=4,n=1)
-    livetime.NaI[i]=readBin(file.connection,what= integer(), endian="little",size=4,n=1)
-    spectra.NaI[i,]=readBin(file.connection,what= integer(), endian="little",size=2,n=256)
-  }
-  close(file.connection)
-
-
-
-
-
+  # fix.offset
+  # main.nbl.data
 
   if(NBL.type==1)
   {
     output=data.frame(coords,spectra.Main)
   }
 
+
+
+
   if(NBL.type==2)
   {
+    spectra.HPGe = matrix( nrow = n, ncol = 2048)
+    livetime.HPGe = matrix( nrow = n, ncol = 1)
+    realtime.HPGe = matrix( nrow = n, ncol = 1)
+    file.connection = file(file.HPGE, "rb")
+    for(i in 1:n)
+    {
+      realtime.HPGe[i]=readBin(file.connection,what= integer(), endian="little",size=4,n=1)
+      livetime.HPGe[i]=readBin(file.connection,what= integer(), endian="little",size=4,n=1)
+      spectra.HPGe[i,]=readBin(file.conncecortion,what= integer(), endian="little",size=2,n=2048)
+    }
+    close(file.connection)
+
     output=data.frame(coords,spectra.NaI)
   }
 
+
+
+
+
+
   if(NBL.type==3)
   {
+    spectra.NaI = matrix( nrow = n, ncol = 256)
+    livetime.NaI = matrix( nrow = n, ncol = 1)
+    realtime.NaI = matrix( nrow = n, ncol = 1)
+    file.connection = file(file.NaI, "rb")
+    for(i in 1:n)
+    {
+      realtime.NaI[i]=readBin(file.connection,what= integer(), endian="little",size=4,n=1)
+      livetime.NaI[i]=readBin(file.connection,what= integer(), endian="little",size=4,n=1)
+      spectra.NaI[i,]=readBin(file.connection,what= integer(), endian="little",size=2,n=256)
+    }
+    close(file.connection)
+
+
     output=data.frame(coords,spectra.HPGe)
   }
+
+
+
+
+
+  # if(NBL.type==2)
+  # {
+  #   output=data.frame(coords,spectra.NaI)
+  # }
+  #
+  # if(NBL.type==3)
+  # {
+  #   output=data.frame(coords,spectra.HPGe)
+  # }
 
 
 
